@@ -67,16 +67,10 @@ def add_formatted_runs(paragraph, text: str, size_pt: int = 12, base_bold: bool 
         token = match.group(0)
         if token.startswith("**") and token.endswith("**"):
             inner = token[2:-2]
-            r = paragraph.add_run(inner)
-            r.bold = True
-            r.italic = base_italic
-            set_run_font(r, size_pt=size_pt)
+            add_formatted_runs(paragraph, inner, size_pt=size_pt, base_bold=True, base_italic=base_italic)
         elif token.startswith("*") and token.endswith("*"):
             inner = token[1:-1]
-            r = paragraph.add_run(inner)
-            r.bold = base_bold
-            r.italic = True
-            set_run_font(r, size_pt=size_pt)
+            add_formatted_runs(paragraph, inner, size_pt=size_pt, base_bold=base_bold, base_italic=True)
         elif token.startswith("`") and token.endswith("`"):
             inner = token[1:-1]
             r = paragraph.add_run(inner)
